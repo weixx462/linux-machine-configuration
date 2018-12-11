@@ -48,5 +48,67 @@ sudo timedatectl set-timezone UTC
 ```
 6. Install libraries & packages
 
+Python:
+```
+sudo apt install python-minimal
+```
+sqlalchemy
+```
+sudo apt-get install python-pip
+pip install sqlalchemy
+```
+Flask:
+```
+sudo pip install Flask
+```
+Oauth:
+```
+sudo pip install --upgrade oauth2client
+```
+Requests:
+```
+sudo pip install requests
+```
+Postgres Database:
+```
+sudo apt-get install python-psycopg2
+```
+Apache Server:
+```
+sudo apt-get install apache2
+sudo apt-get install libapache2-mod-wsgi-py3
+sudo apt-get install libapache2-mod-wsgi
+sudo a2enmod wsgi
+```
+Git:
+```
+sudo apt install git
+```
+
+7. Configure Apache Server
+
+clone item catalog repo to /var/www and follow the instructions in item catalog repo https://github.com/weixx462/catalog-items-website
+
+add the following line to /etc/apache2/sites-enabled/000-default.conf
+```
+WSGIScriptAlias / /var/www/catalog-items-website/project.wsgi
+```
+
+create file /var/www/catalog-items-website/project.wsgi, add the following codes
+
+```
+import sys
+sys.path.insert(0, "/var/www/catalog-items-website/")
+
+from project import app as application
+```
+
+Then restart apache:
+```
+sudo service apache2 restart
+```
+
+Reference: http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/
+
 
 
